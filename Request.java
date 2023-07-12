@@ -46,19 +46,12 @@ public class Request {
 
     //for input of one number
     public void performRequest1() {
-        System.out.print("\nProperties of " + naturalNum + "\n" +
-                "\t\tbuzz: " + Property.BUZZ.check(naturalNum) + "\n" +
-                "\t\tduck: " + Property.DUCK.check(naturalNum) + "\n" +
-                "\t\tpalindromic: " + Property.PALINDROMIC.check(naturalNum) + "\n" +
-                "\t\tgapful: " + Property.GAPFUL.check(naturalNum) + "\n" +
-                "\t\tspy: " + Property.SPY.check(naturalNum) + "\n" +
-                "\t\tsquare: " + Property.SQUARE.check(naturalNum) + "\n" +
-                "\t\tsunny: " + Property.SUNNY.check(naturalNum) + "\n" +
-                "\t\tjumping: " + Property.JUMPING.check(naturalNum) + "\n" +
-                "\t\thappy: " + Property.HAPPY.check(naturalNum) + "\n" +
-                "\t\tsad: " + Property.SAD.check(naturalNum) + "\n" +
-                "\t\teven: " + Property.EVEN.check(naturalNum) + "\n" +
-                "\t\todd: " + Property.ODD.check(naturalNum) + "\n");
+        String check = "";
+        for (Property property: Property.values()) {
+            check += "\t\t"+property.name().toLowerCase()+": " + property.check(naturalNum) + "\n" ;
+        }
+
+        System.out.print("\nProperties of " + naturalNum + "\n" + check);
     }
 
     //for input of two numbers
@@ -79,55 +72,45 @@ public class Request {
 
             long newNum = naturalNum + i;
 
-            if (Property.BUZZ.check(newNum)) presentProperties.add("buzz");
-            if (Property.DUCK.check(newNum)) presentProperties.add("duck");
-            if (Property.PALINDROMIC.check(newNum)) presentProperties.add("palindromic");
-            if (Property.GAPFUL.check(newNum)) presentProperties.add("gapful");
-            if (Property.SPY.check(newNum)) presentProperties.add("spy");
-            if (Property.SQUARE.check(newNum)) presentProperties.add("square");
-            if (Property.SUNNY.check(newNum)) presentProperties.add("sunny");
-            if (Property.JUMPING.check(newNum)) presentProperties.add("jumping");
-            if (Property.HAPPY.check(newNum)) presentProperties.add("happy");
-            if (Property.SAD.check(newNum)) presentProperties.add("sad");
-            if (Property.EVEN.check(newNum)) presentProperties.add("even");
-            if (Property.ODD.check(newNum)) presentProperties.add("odd");
+            for (Property property: Property.values())
+            {
+                if (property.check(newNum)) {
+                    presentProperties.add(property.name().toLowerCase());
+                }
+            }
 
             //present properties are in lower case
             String message = newNum + " is " + presentProperties;
 
             //if specific properties are requested by user
-            if (properties.size() > 0) {
+            int elementsCheck = 0;
 
-                for (int x = 0; x < properties.size(); x++) {
-                    if (properties.get(x).toString().startsWith("-")) {
-                        excludeProperties.add(properties.get(x).toString().replace("-",""));
-                    }
+                //properties that should not be present
+            for (int x = 0; x < properties.size(); x++) {
+                if (properties.get(x).toString().startsWith("-")) {
+                    excludeProperties.add(properties.get(x).toString().replace("-",""));
                 }
+            }
 
-                int elementsCheck = 0;
+            for (Object excludeProperty: excludeProperties) {
+                boolean x = (presentProperties.toString().toUpperCase().contains(excludeProperty.toString()));
+                if (!x) {
+                    elementsCheck++;
+                }
+            }
 
-                for (Object property : properties) {
-                    for (String presentProperty : presentProperties) {
-                        //if properties of current number match properties requested
-
+            for (Object property : properties) {
+                for (String presentProperty : presentProperties) {
+                    //if properties of current number match properties requested
                         if (property.toString().equalsIgnoreCase(presentProperty)) {
                             elementsCheck++;
                         }
                     }
                 }
-                for (Object excludeProperty: excludeProperties) {
-                    boolean x = (presentProperties.toString().toUpperCase().contains(excludeProperty.toString()));
-                    if (!x) {
-                        elementsCheck++;
-                    }
-                }
 
-
-                //if all current properties matched with requested properties
-                if (elementsCheck == properties.size()) {
-                    arr.add(message);
-                }
-            } else {       //if no properties are requested
+            //if all current properties matched with requested properties
+            //or if no properties are requested -->size()=0 and elementsCheck=0
+            if (elementsCheck == properties.size()) {
                 arr.add(message);
             }
             i++;
@@ -200,7 +183,7 @@ public class Request {
             return true;
         }
         for (Property property : Property.values()) {
-            if (properties.contains(property.name) && properties.contains("-" + property.name)) {
+            if (properties.contains(property.name()) && properties.contains("-" + property.name())) {
                 return true;
             }
         }
@@ -214,7 +197,7 @@ public class Request {
 
         for (int i = 0; i < properties.size(); i++) {
             for (int j = 0; j < availProperties.length; j++) {
-                if ((availProperties[j].name.equalsIgnoreCase(properties.get(i).toString())) || (("-"+availProperties[j].name).equalsIgnoreCase(properties.get(i).toString()))) {
+                if ((availProperties[j].name().equalsIgnoreCase(properties.get(i).toString())) || (("-"+availProperties[j].name()).equalsIgnoreCase(properties.get(i).toString()))) {
 
                     break;
                 }
