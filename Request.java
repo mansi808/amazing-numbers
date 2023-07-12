@@ -17,6 +17,7 @@ public class Request {
                     "- two natural numbers and properties to search for;\n" +
                     "- a property preceded by minus must not be present in numbers;\n" +
                     "- separate the parameters with one space;\n" +
+                    "- enter 'properties' to see available properties;\n" +
                     "- enter 0 to exit.";
 
 
@@ -164,7 +165,12 @@ public class Request {
 
         } catch (NumberFormatException e) {
 
-            System.out.println("The first parameter should be a natural number or zero.\n");
+            if (arr.get(0).equalsIgnoreCase("properties")) {
+                System.out.print(Arrays.asList(Property.values())+"\n");
+            }
+            else {
+                System.out.println("The first parameter should be a natural number or zero.\n");
+            }
             repeat =true;
 
         }
@@ -201,7 +207,7 @@ public class Request {
         return false;
     }
 
-    //    returns all properties not availaible and/or are invalid
+//    returns all properties not availaible and/or are invalid
     public ArrayList<String> getInvalidInputProperties(Property[] availProperties) {
 
         ArrayList<String> invalidProperties = new ArrayList<>();
