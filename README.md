@@ -8,9 +8,9 @@
 
 - you can also add properties you want ```64 4 duck```
 
--  "-" are properties which are avoided in numbers ```64 4 odd```
+-  "-" are properties which are avoided in numbers ```64 4 -odd```
 
--  -  add any number of availaible properties you want (or don't)
+-   add any number of availaible properties you want (or don't)
 
 -  enter 'properties' to see availaible properties
 
