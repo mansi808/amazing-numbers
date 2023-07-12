@@ -10,6 +10,9 @@
 
 -  "-" are properties which are avoided in numbers ```64 4 odd```
 
+-  enter 'properties' to see availaible properties
+  <br></br>
+
 ```
 Welcome to Amazing Numbers!
 
@@ -82,3 +85,5 @@ Goodbye!
 
 Process finished with exit code 0
 ```
+
+#### hyperskill 'java developer' track project
