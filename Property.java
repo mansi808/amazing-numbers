@@ -14,34 +14,34 @@ package numbers;
 import java.util.ArrayList;
 
 public enum Property {
-    BUZZ ("BUZZ"){
-        @Override
-        public boolean check(long naturalN) {
-            return endsWith7(naturalN) || isDivisibleBy7(naturalN);
-        }
+   BUZZ {
+       @Override
+       public boolean check(long naturalN) {
+           return endsWith7(naturalN) || isDivisibleBy7(naturalN);
+       }
 
-        private boolean endsWith7(long naturalN) {
-            return (String.valueOf(naturalN).endsWith("7"));
-        }
+       private boolean endsWith7(long naturalN) {
+           return (String.valueOf(naturalN).endsWith("7"));
+       }
 
-        private boolean isDivisibleBy7(long naturalN) {
-            if (naturalN > 70) {
-                String numStr = String.valueOf(naturalN);
-                long testNum = Long.valueOf(numStr.substring(0, numStr.length() - 1)) - (naturalN % 10 * 2);
-                isDivisibleBy7(testNum);
-            }
-            return naturalN % 7 == 0;
-        }
+       private boolean isDivisibleBy7(long naturalN) {
+           if (naturalN > 70) {
+               String numStr = String.valueOf(naturalN);
+               long testNum = Long.valueOf(numStr.substring(0, numStr.length() - 1)) - (naturalN % 10 * 2);
+               isDivisibleBy7(testNum);
+           }
+           return naturalN % 7 == 0;
+       }
 
-    },
-    DUCK ("DUCK"){
-        @Override
+   },
+    DUCK {
+       @Override
         public boolean check(long naturalN) {
             String strN = String.valueOf(naturalN);
             return strN.replaceAll("^0+","").contains("0");  //replacing all leading zeroes`
         }
     },
-    PALINDROMIC ("PALINDROMIC"){
+    PALINDROMIC {
         @Override
         public boolean check(long naturalN) {
             String strN = String.valueOf(naturalN);
@@ -52,7 +52,7 @@ public enum Property {
             return strN.equals(reverStrN);
         }
     },
-    GAPFUL ("GAPFUL"){
+    GAPFUL {
         @Override
         public boolean check(long naturalN) {
             if (naturalN>99) { //three digit number
@@ -62,7 +62,7 @@ public enum Property {
             } return false;
         }
     },
-    SPY ("SPY"){
+    SPY {
         @Override
         public boolean check(long naturalN) {
             int sum= 0;
@@ -77,7 +77,7 @@ public enum Property {
         }
 
     },
-    SQUARE ("SQUARE"){
+    SQUARE {
         //isSquare() method also used for Sunny numbers
         @Override
         public boolean check(long naturalN) {
@@ -87,25 +87,25 @@ public enum Property {
             return noDecimalSqrt*noDecimalSqrt == naturalN;
         }
     },
-    SUNNY ("SUNNY"){
+    SUNNY {
         @Override
         public boolean check(long naturalN) {
             return SQUARE.check(naturalN+1);
         }
     },
-    EVEN ("EVEN"){
+    EVEN {
         @Override
         public boolean check(long naturalN) {
             return naturalN % 2 == 0;
         }
     },
-    ODD ("ODD"){
+    ODD {
         @Override
         public boolean check(long naturalN) {
             return EVEN.check(naturalN+1);
         }
     },
-    JUMPING ("JUMPING"){
+    JUMPING {
         @Override
         public boolean check(long naturalN) {
             String[] strN = String.valueOf(naturalN).split("");
@@ -117,7 +117,7 @@ public enum Property {
             } return true;
         }
     },
-    HAPPY ("HAPPY"){
+    HAPPY {
         @Override
         public boolean check(long naturalN) {
             String[] strN = String.valueOf(naturalN).split("");
@@ -135,23 +135,18 @@ public enum Property {
             } return check(N);
         }
     },
-    SAD ("SAD"){
+    SAD {
         @Override
         public boolean check(long naturalN) {
             return !HAPPY.check(naturalN);
         }
     };
 
-    public abstract boolean check(long naturalN);
+   public abstract boolean check(long naturalN);
 
-    //contains all parameters for check() method of HAPPY enum
+   //contains all parameters for check() method of HAPPY enum
     //applies to happy enums only
-    private ArrayList<Long> checkedHappyNums = new ArrayList<>();
+   private ArrayList<Long> checkedHappyNums = new ArrayList<>();
 
-    public final String name;
-
-    Property(String name) {
-        this.name = name;
-    }
 
 }
