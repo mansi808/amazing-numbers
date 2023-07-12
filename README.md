@@ -15,7 +15,6 @@
 -  enter 'properties' to see availaible properties
 
   <br></br>
-
 ```
 Welcome to Amazing Numbers!
 
