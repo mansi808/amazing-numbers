@@ -15,7 +15,7 @@ public class Main {
         ArrayList<String> arr = Request.requestForm(scanner);
         long n = Long.parseLong(arr.get(0));
 
-        while (n!=0) { //first parameter zero exception handled
+        while (n!=0) { //first parameter -->zero input=exit
             if (arr.size() == 1) {
 
                 Request request = new Request(n);
@@ -55,14 +55,11 @@ public class Main {
                         System.out.println("The request contains mutually exclusive properties: " + request.properties +
                                 ".\nThere are no numbers with these properties.");
 
+                    }
 
+                    if (!repeatForm) {
+                        request.performRequest2();
                     }
-                    if (repeatForm) {
-                        arr = Request.requestForm(scanner);
-                        n = Long.parseLong(arr.get(0));
-                        continue;
-                    }
-                    request.performRequest2();
                 }
 
             }
