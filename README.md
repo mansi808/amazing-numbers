@@ -10,7 +10,10 @@
 
 -  "-" are properties which are avoided in numbers ```64 4 odd```
 
+-  -  add any number of availaible properties you want (or don't)
+
 -  enter 'properties' to see availaible properties
+
   <br></br>
 
 ```
@@ -58,12 +61,6 @@ Enter a request:
 		34 is [jumping, sad, even]
 
 Enter a request:
-54 2 gapful sad even
-
-		108 is [duck, gapful, sad, even]
-		110 is [duck, gapful, sad, even]
-
-Enter a request:
 32 2 -even square
 
 		49 is [buzz, square, happy, odd]
@@ -86,4 +83,4 @@ Goodbye!
 Process finished with exit code 0
 ```
 
-#### hyperskill 'java developer' track project
+##### <i>hyperskill 'java developer' track project</i>
