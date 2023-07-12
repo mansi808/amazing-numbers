@@ -18,13 +18,14 @@
 Welcome to Amazing Numbers!
 
 Supported requests:
-- enter a natural number to know its properties; 
+- enter a natural number to know its properties;
 - enter two natural numbers to obtain the properties of the list:
-  * the first parameter represents a starting number;
-  * the second parameter shows how many consecutive numbers are to be processed;
+* the first parameter represents a starting number;
+* the second parameter shows how many consecutive numbers are to be processed;
 - two natural numbers and properties to search for;
 - a property preceded by minus must not be present in numbers;
 - separate the parameters with one space;
+- enter 'properties' to see available properties;
 - enter 0 to exit.
 
 Enter a request:
