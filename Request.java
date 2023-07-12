@@ -60,66 +60,59 @@ public class Request {
 
         //arr stores the numbers which satisfy conditions
         ArrayList<String> arr = new ArrayList<>();
-        int i = 0;
+        int i = -1;
 
         mainLoop:
         while (arr.size() < loopFor) {
+            i++;
+            long newNum = naturalNum + i;
 
             //properties present in the current number
             ArrayList<String> presentProperties = new ArrayList<>();
 
-            List excludeProperties = new ArrayList<>();
+            for (Property property: Property.values()) {
 
-            long newNum = naturalNum + i;
-
-            for (Property property: Property.values())
-            {
                 if (property.check(newNum)) {
                     presentProperties.add(property.name().toLowerCase());
                 }
             }
 
-            //present properties are in lower case
-            String message = newNum + " is " + presentProperties;
-
-            //if specific properties are requested by user
-            int elementsCheck = 0;
-
-                //properties that should not be present
-            for (int x = 0; x < properties.size(); x++) {
-                if (properties.get(x).toString().startsWith("-")) {
-                    excludeProperties.add(properties.get(x).toString().replace("-",""));
-                }
-            }
-
-            for (Object excludeProperty: excludeProperties) {
-                boolean x = (presentProperties.toString().toUpperCase().contains(excludeProperty.toString()));
-                if (!x) {
-                    elementsCheck++;
-                }
-            }
+            //properties requested by user
+            int required = 0;
+            //properties that should not be present
+            int notRequired=0;
 
             for (Object property : properties) {
-                for (String presentProperty : presentProperties) {
-                    //if properties of current number match properties requested
-                        if (property.toString().equalsIgnoreCase(presentProperty)) {
-                            elementsCheck++;
-                        }
-                    }
+
+                if (property.toString().startsWith("-")) {
+                    notRequired++;
                 }
+
+                for (String presentProperty : presentProperties) {
+
+                    //if properties of current number match properties requested
+                    if (property.toString().equalsIgnoreCase(presentProperty)) {
+                        required++;
+                    } if (property.toString().equalsIgnoreCase("-"+presentProperty)) {
+                        continue mainLoop;
+                    }
+
+                }
+            }
+
+            String message = newNum + " is " + presentProperties;
 
             //if all current properties matched with requested properties
             //or if no properties are requested -->size()=0 and elementsCheck=0
-            if (elementsCheck == properties.size()) {
+            if (required == properties.size()-notRequired) {
+                //present properties are in lower case
                 arr.add(message);
             }
-            i++;
 
         }
         System.out.println();
         for (String x : arr) {
-            System.out.print("\t\t");
-            System.out.println(x);
+            System.out.println("\t\t"+x);
         }
     }
 
@@ -175,6 +168,8 @@ public class Request {
 
     //numbers cannot have mutually exclusive properties
     public boolean areMutuallyExclusive() {
+
+        //mutually exclusive pairs
         if ( (properties.contains("EVEN") && properties.contains("ODD")) || (properties.contains("-EVEN") && properties.contains("-ODD")) ||
                 (properties.contains("DUCK") && properties.contains("SPY")) || (properties.contains("DUCK") && properties.contains("-SPY")) ||
                 (properties.contains("SUNNY") && properties.contains("SQUARE")) || (properties.contains("-SUNNY") && properties.contains("-SQUARE")) ||
@@ -183,6 +178,8 @@ public class Request {
             return true;
         }
         for (Property property : Property.values()) {
+
+            //contradicting properties required "-X" && "X"
             if (properties.contains(property.name()) && properties.contains("-" + property.name())) {
                 return true;
             }
