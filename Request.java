@@ -171,7 +171,7 @@ public class Request {
 
         //mutually exclusive pairs
         if ( (properties.contains("EVEN") && properties.contains("ODD")) || (properties.contains("-EVEN") && properties.contains("-ODD")) ||
-                (properties.contains("DUCK") && properties.contains("SPY")) || (properties.contains("DUCK") && properties.contains("-SPY")) ||
+                (properties.contains("DUCK") && properties.contains("SPY")) || (properties.contains("-DUCK") && properties.contains("-SPY")) ||
                 (properties.contains("SUNNY") && properties.contains("SQUARE")) || (properties.contains("-SUNNY") && properties.contains("-SQUARE")) ||
                 (properties.contains("ODD") && properties.contains("EVEN")) ||  (properties.contains("-ODD") && properties.contains("-EVEN"))
         ) {
